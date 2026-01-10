@@ -22,6 +22,7 @@ final class PomodoroViewModel {
     var mode: Mode = .focus
     var state: State = .idle
     var displayRemaining: TimeInterval = 25 * 60
+    var focusTitle: String = ""
 
     private var endAt: Date?
     private var remainingWhenPaused: TimeInterval?
@@ -40,6 +41,9 @@ final class PomodoroViewModel {
 
     func start() {
         guard state == .idle else { return }
+        if mode == .focus, focusTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return
+        }
         let duration = initialDuration(for: mode)
         endAt = Date().addingTimeInterval(duration)
         state = .running

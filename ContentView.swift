@@ -5,6 +5,10 @@ struct ContentView: View {
     private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
 
     var body: some View {
+        let isFocusTitleMissing = viewModel.mode == .focus
+            && viewModel.state == .idle
+            && viewModel.focusTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
         VStack(spacing: 16) {
             VStack(spacing: 6) {
                 Text(viewModel.formattedTime())
@@ -13,6 +17,19 @@ struct ContentView: View {
                 Text("\(viewModel.mode.rawValue) · \(viewModel.state.rawValue)")
                     .font(.system(size: 13, weight: .medium))
                     .foregroundStyle(.secondary)
+                if viewModel.mode == .focus, !viewModel.focusTitle.isEmpty {
+                    Text(viewModel.focusTitle)
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+
+            if viewModel.mode == .focus {
+                TextField("输入当前专注内容", text: $viewModel.focusTitle)
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(viewModel.state == .running)
+                    .frame(maxWidth: 240)
             }
 
             HStack(spacing: 10) {
@@ -21,6 +38,7 @@ struct ContentView: View {
                         viewModel.start()
                     }
                     .buttonStyle(.borderedProminent)
+                    .disabled(isFocusTitleMissing)
                 }
 
                 if viewModel.state == .running {
