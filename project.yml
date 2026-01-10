@@ -1,0 +1,57 @@
+name: FocusAt
+options:
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  bundleIdPrefix: com.focusat
+  xcodeVersion: "15.0"
+settings:
+  DEVELOPMENT_TEAM: ""
+  MACOSX_DEPLOYMENT_TARGET: "14.0"
+  CURRENT_PROJECT_VERSION: 1
+  MARKETING_VERSION: 1.0
+  SWIFT_VERSION: 5.9
+  CODE_SIGN_STYLE: Automatic
+  PRODUCT_BUNDLE_IDENTIFIER: com.focusat.pomodoro
+  INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
+  INFOPLIST_KEY_CFBundleDisplayName: FocusAt
+  INFOPLIST_KEY_CFBundleName: FocusAt
+  INFOPLIST_KEY_NSHumanReadableCopyright: ""
+
+packages: {}
+
+schemes:
+  FocusAt:
+    build:
+      targets:
+        FocusAt: all
+    run:
+      config: Debug
+
+targets:
+  FocusAt:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: .
+        excludes:
+          - .git
+          - project.yml
+          - README.md
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_FILE: Info.plist
+        INFOPLIST_KEY_CFBundleExecutable: ""
+        INFOPLIST_KEY_LSUIElement: false
+        PRODUCT_NAME: FocusAt
+        SWIFTUI_PREVIEW_ENABLE: true
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDevelopmentRegion: en
+        NSPrincipalClass: NSApplication
+        NSMainStoryboardFile: ""
+        NSApplicationSceneManifest:
+          NSApplicationSupportsSecureRestorableState: true
