@@ -30,9 +30,16 @@ final class PomodoroViewModel {
         let status: SessionStatus
     }
 
+    struct SessionStore: Codable {
+        let schemaVersion: Int
+        var sessions: [Session]
+    }
+
     private let focusDuration: TimeInterval = 25 * 60
     private let breakDuration: TimeInterval = 5 * 60
     private let notificationIdentifier = "pomodoro.timer.complete"
+    private let sessionSchemaVersion = 1
+    private let sessionLimit = 500
 
     var mode: Mode = .focus
     var state: State = .idle
@@ -198,7 +205,11 @@ final class PomodoroViewModel {
             let data = try Data(contentsOf: fileURL)
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            sessions = try decoder.decode([Session].self, from: data)
+            if let store = try? decoder.decode(SessionStore.self, from: data) {
+                sessions = store.sessions
+            } else {
+                sessions = try decoder.decode([Session].self, from: data)
+            }
         } catch {
             sessions = []
         }
@@ -212,7 +223,8 @@ final class PomodoroViewModel {
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             encoder.dateEncodingStrategy = .iso8601
-            let data = try encoder.encode(sessions)
+            let store = SessionStore(schemaVersion: sessionSchemaVersion, sessions: sessions)
+            let data = try encoder.encode(store)
             try data.write(to: fileURL, options: [.atomic])
         } catch {
             // Ignore persistence errors for V1.
@@ -237,6 +249,9 @@ final class PomodoroViewModel {
             status: status
         )
         sessions.insert(session, at: 0)
+        if sessions.count > sessionLimit {
+            sessions.removeLast(sessions.count - sessionLimit)
+        }
         saveSessions()
     }
 
