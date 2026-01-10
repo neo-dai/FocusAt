@@ -4,7 +4,7 @@ import Observation
 
 @Observable
 final class PomodoroViewModel {
-    enum Mode: String {
+    enum Mode: String, Codable {
         case focus = "Focus"
         case `break` = "Break"
     }
@@ -15,6 +15,21 @@ final class PomodoroViewModel {
         case paused = "Paused"
     }
 
+    enum SessionStatus: String, Codable {
+        case completed
+        case abandoned
+    }
+
+    struct Session: Identifiable, Codable {
+        let id: UUID
+        let title: String
+        let mode: Mode
+        let startAt: Date
+        let endAt: Date
+        let durationSeconds: TimeInterval
+        let status: SessionStatus
+    }
+
     private let focusDuration: TimeInterval = 25 * 60
     private let breakDuration: TimeInterval = 5 * 60
     private let notificationIdentifier = "pomodoro.timer.complete"
@@ -23,12 +38,18 @@ final class PomodoroViewModel {
     var state: State = .idle
     var displayRemaining: TimeInterval = 25 * 60
     var focusTitle: String = ""
+    var sessions: [Session] = []
 
     private var endAt: Date?
     private var remainingWhenPaused: TimeInterval?
+    private var currentSessionStartAt: Date?
 
     // 版本计划:
     // [V0] MVP: Focus 25/Break 5, EndAt 逻辑, 本地通知, 仅窗口模式.
+
+    init() {
+        loadSessions()
+    }
 
     func requestNotificationAuthorization() async {
         let center = UNUserNotificationCenter.current()
@@ -45,6 +66,9 @@ final class PomodoroViewModel {
             return
         }
         let duration = initialDuration(for: mode)
+        if currentSessionStartAt == nil {
+            currentSessionStartAt = Date()
+        }
         endAt = Date().addingTimeInterval(duration)
         state = .running
         updateDisplay()
@@ -71,6 +95,9 @@ final class PomodoroViewModel {
     }
 
     func reset() {
+        if state == .running || state == .paused {
+            recordAbandonedSession()
+        }
         endAt = nil
         remainingWhenPaused = nil
         state = .idle
@@ -86,6 +113,7 @@ final class PomodoroViewModel {
     func tick() {
         updateDisplay()
         if state == .running, remainingTime() <= 0 {
+            recordCompletedSession()
             endAt = nil
             remainingWhenPaused = nil
             state = .idle
@@ -120,6 +148,96 @@ final class PomodoroViewModel {
 
     private func updateDisplay() {
         displayRemaining = remainingTime()
+    }
+
+    private func recordCompletedSession() {
+        guard let actualEndAt = endAt else { return }
+        let startAt = currentSessionStartAt ?? actualEndAt.addingTimeInterval(-initialDuration(for: mode))
+        let duration = max(0, actualEndAt.timeIntervalSince(startAt))
+        addSession(
+            title: mode == .focus ? focusTitle.trimmingCharacters(in: .whitespacesAndNewlines) : "",
+            mode: mode,
+            startAt: startAt,
+            endAt: actualEndAt,
+            durationSeconds: duration,
+            status: .completed
+        )
+        currentSessionStartAt = nil
+    }
+
+    private func recordAbandonedSession() {
+        let now = Date()
+        let total = initialDuration(for: mode)
+        let remaining = remainingTime()
+        let elapsed = max(0, total - remaining)
+        guard elapsed > 1 else { return }
+        let startAt = now.addingTimeInterval(-elapsed)
+        addSession(
+            title: mode == .focus ? focusTitle.trimmingCharacters(in: .whitespacesAndNewlines) : "",
+            mode: mode,
+            startAt: currentSessionStartAt ?? startAt,
+            endAt: now,
+            durationSeconds: elapsed,
+            status: .abandoned
+        )
+        currentSessionStartAt = nil
+    }
+
+    private func sessionsFileURL() -> URL? {
+        let fileManager = FileManager.default
+        guard let base = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let folder = base.appendingPathComponent("FocusAt", isDirectory: true)
+        return folder.appendingPathComponent("sessions.json")
+    }
+
+    private func loadSessions() {
+        guard let fileURL = sessionsFileURL() else { return }
+        do {
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            sessions = try decoder.decode([Session].self, from: data)
+        } catch {
+            sessions = []
+        }
+    }
+
+    private func saveSessions() {
+        guard let fileURL = sessionsFileURL() else { return }
+        do {
+            let folder = fileURL.deletingLastPathComponent()
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            encoder.dateEncodingStrategy = .iso8601
+            let data = try encoder.encode(sessions)
+            try data.write(to: fileURL, options: [.atomic])
+        } catch {
+            // Ignore persistence errors for V1.
+        }
+    }
+
+    private func addSession(
+        title: String,
+        mode: Mode,
+        startAt: Date,
+        endAt: Date,
+        durationSeconds: TimeInterval,
+        status: SessionStatus
+    ) {
+        let session = Session(
+            id: UUID(),
+            title: title,
+            mode: mode,
+            startAt: startAt,
+            endAt: endAt,
+            durationSeconds: durationSeconds,
+            status: status
+        )
+        sessions.insert(session, at: 0)
+        saveSessions()
     }
 
     private func scheduleNotification(at date: Date?) {
