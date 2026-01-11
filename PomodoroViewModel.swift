@@ -7,6 +7,7 @@ final class PomodoroViewModel {
     enum Mode: String, Codable {
         case focus = "Focus"
         case `break` = "Break"
+        case longBreak = "Long Break"
     }
 
     enum State: String {
@@ -37,6 +38,7 @@ final class PomodoroViewModel {
 
     private let focusDuration: TimeInterval = 25 * 60
     private let breakDuration: TimeInterval = 5 * 60
+    private let longBreakDuration: TimeInterval = 15 * 60
     private let notificationIdentifier = "pomodoro.timer.complete"
     private let sessionSchemaVersion = 1
     private let sessionLimit = 500
@@ -46,6 +48,7 @@ final class PomodoroViewModel {
     var displayRemaining: TimeInterval = 25 * 60
     var focusTitle: String = ""
     var sessions: [Session] = []
+    var completedFocusCount: Int = 0
 
     private var endAt: Date?
     private var remainingWhenPaused: TimeInterval?
@@ -56,6 +59,7 @@ final class PomodoroViewModel {
 
     init() {
         loadSessions()
+        updateDisplay()
     }
 
     func requestNotificationAuthorization() async {
@@ -113,19 +117,21 @@ final class PomodoroViewModel {
     }
 
     func switchMode() {
-        mode = (mode == .focus) ? .break : .focus
+        switch mode {
+        case .focus:
+            mode = .break
+        case .break:
+            mode = .longBreak
+        case .longBreak:
+            mode = .focus
+        }
         reset()
     }
 
     func tick() {
         updateDisplay()
         if state == .running, remainingTime() <= 0 {
-            recordCompletedSession()
-            endAt = nil
-            remainingWhenPaused = nil
-            state = .idle
-            displayRemaining = 0
-            cancelNotifications()
+            handleCompletion()
         }
     }
 
@@ -137,11 +143,33 @@ final class PomodoroViewModel {
     }
 
     private func initialDuration(for mode: Mode) -> TimeInterval {
+        #if DEBUG
+        if let override = debugOverrideSeconds(for: mode) {
+            return override
+        }
+        #endif
         switch mode {
         case .focus: return focusDuration
         case .break: return breakDuration
+        case .longBreak: return longBreakDuration
         }
     }
+
+    #if DEBUG
+    private func debugOverrideSeconds(for mode: Mode) -> TimeInterval? {
+        let env = ProcessInfo.processInfo.environment
+        let key: String
+        switch mode {
+        case .focus: key = "FOCUS_SECONDS"
+        case .break: key = "BREAK_SECONDS"
+        case .longBreak: key = "LONG_BREAK_SECONDS"
+        }
+        guard let value = env[key], let seconds = Double(value), seconds > 0 else {
+            return nil
+        }
+        return seconds
+    }
+    #endif
 
     private func remainingTime() -> TimeInterval {
         if state == .running, let endAt {
@@ -155,6 +183,28 @@ final class PomodoroViewModel {
 
     private func updateDisplay() {
         displayRemaining = remainingTime()
+    }
+
+    private func handleCompletion() {
+        recordCompletedSession()
+        endAt = nil
+        remainingWhenPaused = nil
+        state = .idle
+        cancelNotifications()
+
+        if mode == .focus {
+            completedFocusCount += 1
+            if completedFocusCount >= 4 {
+                completedFocusCount = 0
+                mode = .longBreak
+            } else {
+                mode = .break
+            }
+        } else {
+            mode = .focus
+        }
+
+        displayRemaining = initialDuration(for: mode)
     }
 
     private func recordCompletedSession() {
@@ -261,7 +311,14 @@ final class PomodoroViewModel {
 
         let content = UNMutableNotificationContent()
         content.title = "Pomodoro"
-        content.body = mode == .focus ? "Focus session complete." : "Break time is over."
+        switch mode {
+        case .focus:
+            content.body = "Focus session complete."
+        case .break:
+            content.body = "Break time is over."
+        case .longBreak:
+            content.body = "Long break is over."
+        }
         content.sound = .default
 
         let triggerDate = Calendar.current.dateComponents(

@@ -94,7 +94,7 @@ struct ContentView: View {
     }
 
     private var historyView: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 6) {
             Text("历史记录")
                 .font(.system(size: 14, weight: .semibold))
 
@@ -102,7 +102,7 @@ struct ContentView: View {
                 Text("暂无记录")
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, minHeight: 90)
+                    .frame(maxWidth: .infinity, minHeight: 140)
             } else {
                 ScrollView {
                     VStack(spacing: 8) {
@@ -121,7 +121,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .frame(maxHeight: 90)
+                .frame(height: 140)
             }
         }
     }
@@ -130,7 +130,10 @@ struct ContentView: View {
         if session.mode == .focus {
             return session.title.isEmpty ? "未命名专注" : session.title
         }
-        return "休息"
+        if session.mode == .longBreak {
+            return "长休息"
+        }
+        return "短休息"
     }
 
     private func sessionSubtitle(_ session: PomodoroViewModel.Session) -> String {
