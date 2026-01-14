@@ -5,8 +5,8 @@ struct PomodoroApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(width: 300, height: 220)
+                .frame(minWidth: 300, minHeight: 240)
         }
-        .windowResizability(.contentSize)
+        .windowResizability(.contentMinSize)
     }
 }

@@ -1,5 +1,12 @@
 # FocusAt 番茄钟 (V0)
 
+## 平台
+- macOS
+- watchOS（本地独立存储）
+
+## 图标来源
+- OpenMoji 1F345 Tomato (CC BY-SA 4.0): https://openmoji.org/library/emoji-1F345/
+
 ## 版本计划
 
 ### V0 核心基石

@@ -3,30 +3,110 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		280B59B79B60FD1B394A8AFC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = "TEMP_1055BA63-8F95-47D7-873F-D9439C234778" /* ContentView.swift */; };
-		2FC938E429A4176DE45848B3 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = "TEMP_AAC66FDD-73D0-4449-9738-584D9CFF5603" /* PomodoroApp.swift */; };
-		895F2F0097F008A018847830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = "TEMP_AA9C4D42-EB33-4E77-BACA-CA6F2B8F045B" /* Assets.xcassets */; };
-		CBB4306B8A210C141AD88508 /* PomodoroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = "TEMP_0380A2A7-5071-47A4-802C-F86DE0707F84" /* PomodoroViewModel.swift */; };
+		00E849B0B7B759062C08D715 /* FocusAt.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = "TEMP_7A79044F-1556-4780-91C3-FA6C36CEAC3F" /* FocusAt.xcodeproj */; };
+		073220AB01536076027B1A2D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = "TEMP_BC295CCA-B5FB-4A37-920B-8FCF9F2D37D3" /* ContentView.swift */; };
+		3AE3E1458CFFD229DC7DDCBF /* macos-build.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9DB2747C78514917CFF81 /* macos-build.yml */; };
+		62BCE73E33DF2B34FBF9FB7A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A7DEF6D16B6D421CC027E /* ExtensionDelegate.swift */; };
+		8F085AA8DC6FE38EFA5D40EC /* PomodoroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD09DB239BA03146FD26E3D /* PomodoroViewModel.swift */; };
+		99EBB6E13836BCFEC5ECDA18 /* FocusAtWatchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C528AE1281D976EEC6A8C28E /* FocusAtWatchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9B66494DA06B808421B168C1 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = "TEMP_60899DE2-A94A-48A0-9924-B41C8FBA6BD7" /* PomodoroApp.swift */; };
+		9CAE26A8B77A3EB936211ECB /* WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8CB2BB0DC642F3690B7F1 /* WatchApp.swift */; };
+		9D7CDA885025F784F1EA67C7 /* PomodoroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD09DB239BA03146FD26E3D /* PomodoroViewModel.swift */; };
+		BD4D505A7A7571AD001208C9 /* WatchAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556F32A58FA24BC7CEB5ECDA /* WatchAssets.xcassets */; };
+		C0104BECC105251BB16AE0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = "TEMP_19F9F51A-6650-4C7C-BDF5-C0F91714FEE5" /* Assets.xcassets */; };
+		D5523B1A0C56FC76693813B1 /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9102F9B696778CC6AA9BF9 /* WatchContentView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EA17912FF05DA1B58DBEBB3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F04A96303CB7201AB483F536 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30E5BCEAE4C0F97B0AF32426;
+			remoteInfo = FocusAtWatchExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A785FD539D607A4A0A6FDEF8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				99EBB6E13836BCFEC5ECDA18 /* FocusAtWatchExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1B9102F9B696778CC6AA9BF9 /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
+		556F32A58FA24BC7CEB5ECDA /* WatchAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchAssets.xcassets; sourceTree = "<group>"; };
+		55C8CB2BB0DC642F3690B7F1 /* WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
+		9BB9DB2747C78514917CFF81 /* macos-build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "macos-build.yml"; sourceTree = "<group>"; };
+		A6A24DA15D4C2842938E13EC /* FocusAtWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FocusAtWatch.app; path = "FocusAt Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACBB4194231711B024DEC492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C528AE1281D976EEC6A8C28E /* FocusAtWatchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = FocusAtWatchExtension.appex; path = "FocusAt Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAD09DB239BA03146FD26E3D /* PomodoroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroViewModel.swift; sourceTree = "<group>"; };
+		F02A7DEF6D16B6D421CC027E /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		F9F8751DB00CDBF91B73A3D4 /* FocusAt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusAt.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		"TEMP_0380A2A7-5071-47A4-802C-F86DE0707F84" /* PomodoroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroViewModel.swift; sourceTree = "<group>"; };
-		"TEMP_1055BA63-8F95-47D7-873F-D9439C234778" /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		"TEMP_3AB457FB-28E6-4031-B15A-07A95E105BE7" /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		"TEMP_AA9C4D42-EB33-4E77-BACA-CA6F2B8F045B" /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		"TEMP_AAC66FDD-73D0-4449-9738-584D9CFF5603" /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
+		"TEMP_19F9F51A-6650-4C7C-BDF5-C0F91714FEE5" /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		"TEMP_60899DE2-A94A-48A0-9924-B41C8FBA6BD7" /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
+		"TEMP_7A79044F-1556-4780-91C3-FA6C36CEAC3F" /* FocusAt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FocusAt.xcodeproj; sourceTree = "<group>"; };
+		"TEMP_BC295CCA-B5FB-4A37-920B-8FCF9F2D37D3" /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		216D096205F7DF5B35A26CEA /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				9BB9DB2747C78514917CFF81 /* macos-build.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
+		22120D132F13A0EF0081E276 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_BC295CCA-B5FB-4A37-920B-8FCF9F2D37D3" /* ContentView.swift */,
+				"TEMP_60899DE2-A94A-48A0-9924-B41C8FBA6BD7" /* PomodoroApp.swift */,
+				"TEMP_19F9F51A-6650-4C7C-BDF5-C0F91714FEE5" /* Assets.xcassets */,
+				"TEMP_7A79044F-1556-4780-91C3-FA6C36CEAC3F" /* FocusAt.xcodeproj */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		22120D142F13A0EF0081E276 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2E08DFAC903FEE9EF4FF5B5B /* WatchExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F02A7DEF6D16B6D421CC027E /* ExtensionDelegate.swift */,
+				ACBB4194231711B024DEC492 /* Info.plist */,
+				55C8CB2BB0DC642F3690B7F1 /* WatchApp.swift */,
+				1B9102F9B696778CC6AA9BF9 /* WatchContentView.swift */,
+			);
+			path = WatchExtension;
+			sourceTree = "<group>";
+		};
 		34FC40C0F689593BD484C995 = {
 			isa = PBXGroup;
 			children = (
+				CAD09DB239BA03146FD26E3D /* PomodoroViewModel.swift */,
+				C7FC856877965FDAFC1DFD24 /* .github */,
+				B46214890248E89601E823DF /* WatchApp */,
+				2E08DFAC903FEE9EF4FF5B5B /* WatchExtension */,
 				5E7BB58F78D0F45F843329F2 /* Products */,
+				22120D132F13A0EF0081E276 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -34,25 +114,68 @@
 			isa = PBXGroup;
 			children = (
 				F9F8751DB00CDBF91B73A3D4 /* FocusAt.app */,
+				A6A24DA15D4C2842938E13EC /* FocusAtWatch.app */,
+				C528AE1281D976EEC6A8C28E /* FocusAtWatchExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		"TEMP_6FCA8E35-5471-4005-A946-E20AE35E40C2" /* FocusAt */ = {
+		B46214890248E89601E823DF /* WatchApp */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_0380A2A7-5071-47A4-802C-F86DE0707F84" /* PomodoroViewModel.swift */,
-				"TEMP_AA9C4D42-EB33-4E77-BACA-CA6F2B8F045B" /* Assets.xcassets */,
-				"TEMP_1055BA63-8F95-47D7-873F-D9439C234778" /* ContentView.swift */,
-				"TEMP_3AB457FB-28E6-4031-B15A-07A95E105BE7" /* Info.plist */,
-				"TEMP_AAC66FDD-73D0-4449-9738-584D9CFF5603" /* PomodoroApp.swift */,
+				556F32A58FA24BC7CEB5ECDA /* WatchAssets.xcassets */,
 			);
-			path = FocusAt;
+			path = WatchApp;
+			sourceTree = "<group>";
+		};
+		C7FC856877965FDAFC1DFD24 /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				216D096205F7DF5B35A26CEA /* workflows */,
+			);
+			path = .github;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		30E5BCEAE4C0F97B0AF32426 /* FocusAtWatchExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1ED01445BA4C26ED617548A /* Build configuration list for PBXNativeTarget "FocusAtWatchExtension" */;
+			buildPhases = (
+				39EFAFB96E91B23DD72BC482 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FocusAtWatchExtension;
+			packageProductDependencies = (
+			);
+			productName = FocusAtWatchExtension;
+			productReference = C528AE1281D976EEC6A8C28E /* FocusAtWatchExtension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		A9954D8CADA78148DD8945BA /* FocusAtWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EB9FB12807A52922EE54EEE /* Build configuration list for PBXNativeTarget "FocusAtWatch" */;
+			buildPhases = (
+				D72A8293BBA5AB84AE611A5A /* Sources */,
+				E7EF5EC8EA5893CBE27F7C24 /* Resources */,
+				A785FD539D607A4A0A6FDEF8 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A14F93B4C3CA880846D73A78 /* PBXTargetDependency */,
+			);
+			name = FocusAtWatch;
+			packageProductDependencies = (
+			);
+			productName = FocusAtWatch;
+			productReference = A6A24DA15D4C2842938E13EC /* FocusAtWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
 		D3F576775A4F2F10129C5895 /* FocusAt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E89580E3D806EE3B0E91388D /* Build configuration list for PBXNativeTarget "FocusAt" */;
@@ -80,6 +203,14 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					30E5BCEAE4C0F97B0AF32426 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					A9954D8CADA78148DD8945BA = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
 					D3F576775A4F2F10129C5895 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
@@ -96,40 +227,117 @@
 			);
 			mainGroup = 34FC40C0F689593BD484C995;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 22120D142F13A0EF0081E276 /* Products */;
+					ProjectRef = "TEMP_7A79044F-1556-4780-91C3-FA6C36CEAC3F" /* FocusAt.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D3F576775A4F2F10129C5895 /* FocusAt */,
+				A9954D8CADA78148DD8945BA /* FocusAtWatch */,
+				30E5BCEAE4C0F97B0AF32426 /* FocusAtWatchExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E7EF5EC8EA5893CBE27F7C24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD4D505A7A7571AD001208C9 /* WatchAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF7CDED316AB2B39108313E1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				895F2F0097F008A018847830 /* Assets.xcassets in Resources */,
+				C0104BECC105251BB16AE0E4 /* Assets.xcassets in Resources */,
+				00E849B0B7B759062C08D715 /* FocusAt.xcodeproj in Resources */,
+				3AE3E1458CFFD229DC7DDCBF /* macos-build.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		39EFAFB96E91B23DD72BC482 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62BCE73E33DF2B34FBF9FB7A /* ExtensionDelegate.swift in Sources */,
+				8F085AA8DC6FE38EFA5D40EC /* PomodoroViewModel.swift in Sources */,
+				9CAE26A8B77A3EB936211ECB /* WatchApp.swift in Sources */,
+				D5523B1A0C56FC76693813B1 /* WatchContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		79F32E3736FE3FCF6216EA1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				280B59B79B60FD1B394A8AFC /* ContentView.swift in Sources */,
-				2FC938E429A4176DE45848B3 /* PomodoroApp.swift in Sources */,
-				CBB4306B8A210C141AD88508 /* PomodoroViewModel.swift in Sources */,
+				073220AB01536076027B1A2D /* ContentView.swift in Sources */,
+				9B66494DA06B808421B168C1 /* PomodoroApp.swift in Sources */,
+				9D7CDA885025F784F1EA67C7 /* PomodoroViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D72A8293BBA5AB84AE611A5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A14F93B4C3CA880846D73A78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30E5BCEAE4C0F97B0AF32426 /* FocusAtWatchExtension */;
+			targetProxy = EA17912FF05DA1B58DBEBB3A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		12A7C58E3F64F80C0663A168 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro.watch;
+				PRODUCT_NAME = "FocusAt Watch";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		24F147FE55CA1B592FC9BA45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WatchExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro.watch.extension;
+				PRODUCT_NAME = "FocusAt Watch Extension";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
 		291DAF6BA57FD4219F634787 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -207,7 +415,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
@@ -279,12 +486,30 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
+		};
+		A486E1FBB8E3C0933E64C92A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WatchExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro.watch.extension;
+				PRODUCT_NAME = "FocusAt Watch Extension";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
 		};
 		B69C143FE2DC58695545CC2F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -305,6 +530,21 @@
 			};
 			name = Release;
 		};
+		BF589397768FB900E66810EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusat.pomodoro.watch;
+				PRODUCT_NAME = "FocusAt Watch";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -313,6 +553,24 @@
 			buildConfigurations = (
 				9E920EC1967485CBD08BEEEC /* Debug */,
 				9CAD5E6A9B477EE5B3693096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8EB9FB12807A52922EE54EEE /* Build configuration list for PBXNativeTarget "FocusAtWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12A7C58E3F64F80C0663A168 /* Debug */,
+				BF589397768FB900E66810EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1ED01445BA4C26ED617548A /* Build configuration list for PBXNativeTarget "FocusAtWatchExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24F147FE55CA1B592FC9BA45 /* Debug */,
+				A486E1FBB8E3C0933E64C92A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
