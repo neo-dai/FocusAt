@@ -1,6 +1,9 @@
 import Foundation
 import UserNotifications
 import Observation
+#if os(macOS)
+import AppKit
+#endif
 
 @Observable
 final class PomodoroViewModel {
@@ -191,6 +194,7 @@ final class PomodoroViewModel {
         remainingWhenPaused = nil
         state = .idle
         cancelNotifications()
+        requestUserAttentionIfAvailable()
 
         if mode == .focus {
             completedFocusCount += 1
@@ -310,14 +314,14 @@ final class PomodoroViewModel {
         cancelNotifications()
 
         let content = UNMutableNotificationContent()
-        content.title = "Pomodoro"
+        content.title = "时间到"
         switch mode {
         case .focus:
-            content.body = "Focus session complete."
+            content.body = "专注已结束，开始休息。"
         case .break:
-            content.body = "Break time is over."
+            content.body = "休息结束，准备继续专注。"
         case .longBreak:
-            content.body = "Long break is over."
+            content.body = "长休息结束，准备继续专注。"
         }
         content.sound = .default
 
@@ -337,5 +341,11 @@ final class PomodoroViewModel {
 
     private func cancelNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+    private func requestUserAttentionIfAvailable() {
+        #if os(macOS)
+        NSApplication.shared.requestUserAttention(.criticalRequest)
+        #endif
     }
 }
